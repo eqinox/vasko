@@ -1,0 +1,14 @@
+{
+  "header": {
+    "logo": "logo"
+  },
+  "home": {
+    "welcome": "Welcome, I'm",
+    "name": "Vasil Nikolov",
+    "tagline": "Transforming Ideas into Digital Solutions"
+  },
+  "products": {
+    "product": "Product",
+    "description": "Description"
+  }
+}
