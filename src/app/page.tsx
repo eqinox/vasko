@@ -40,7 +40,7 @@ export default function Home() {
       </div>
 
       <h2 className="text-4xl font-bold text-center flex flex-col max-sm:text-2xl bg-gradient-to-r from-slate-500 to-sky-500 bg-clip-text text-transparent mt-16">
-        My websites
+        My website
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -63,6 +63,7 @@ export default function Home() {
           style={{ border: "none" }}
           onLoad={() => setIsLoading(false)}
         />
+
         <div
           className={`absolute inset-0 bg-black/50 flex items-center justify-center transition-opacity duration-500 ${
             isLoading ? "opacity-100" : "opacity-100 group-hover:opacity-0"
@@ -81,18 +82,6 @@ export default function Home() {
         >
           View Website
         </Button>
-      </div>
-      {/* <div className="w-96 h-96 max-sm:w-3/4 max-sm:h-96 bg-slate-600 mx-auto flex items-center justify-center mt-5 group relative overflow-hidden rounded-lg transition-all duration-500 hover:shadow-2xl p-16">
-      
-      </div> */}
-
-      <div className="grid grid-cols-4 gap-4 max-sm:grid-cols-2 p-5 text-slate-900">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <div key={index} className="p-4 rounded-md border-slate-600 border">
-            <h2>Product {index}</h2>
-            <p>Description {index}</p>
-          </div>
-        ))}
       </div>
     </div>
   );

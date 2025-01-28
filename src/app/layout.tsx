@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
 import Header from "@/components/shared/header";
+import Footer from "@/components/shared/footer";
 
 export const metadata: Metadata = {
   title: {
@@ -19,9 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className="antialiased min-h-screen wrapper bg-gradient-to-br from-stone-500 via-stone-600 to-stone-700 py-5">
-        <div className="shadow-[-20px_20px_30px_rgba(0,0,0,0.9)] translate-y-[-10px] rounded-3xl bg-stone-200">
+        <div className="shadow-[-20px_20px_30px_rgba(0,0,0,0.9)] translate-y-[-10px] rounded-3xl bg-stone-200 min-h-[calc(100vh-5rem)] flex flex-col">
           <Header />
-          <main>{children}</main>
+          <main className="flex-1">{children}</main>
+          <Footer />
         </div>
       </body>
     </html>

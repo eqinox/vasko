@@ -11,6 +11,12 @@ const Menu = () => {
             <Home /> Начало
           </Link>
         </Button>
+
+        <Button asChild variant="ghost" className="text-xl">
+          <Link href="/cv">
+            <Home /> CV
+          </Link>
+        </Button>
       </nav>
     </div>
   );

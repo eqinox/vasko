@@ -8,6 +8,15 @@
   }
 }
 
+@layer components {
+  .cvSection {
+    @apply p-2 bg-stone-800 text-white;
+  }
+  .cvSectionSkill {
+    @apply p-2 flex flex-col;
+  }
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
