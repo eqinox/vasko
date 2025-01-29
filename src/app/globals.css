@@ -15,6 +15,21 @@
   .cvSectionSkill {
     @apply p-2 flex flex-col;
   }
+  .cvSectionProfessionalExperienceTitle {
+    @apply text-sky-500 font-bold;
+  }
+  .cvSectionPosition {
+    @apply text-sky-900 font-bold border-b-2 hover:text-sky-600 hover:border-sky-600 border-sky-900 w-fit cursor-pointer;
+  }
+  .cvSectionProfExpFirstCol {
+    @apply text-sky-500 font-bold max-sm:border-b-2 max-sm:mb-2 w-fit border-sky-900 sm:min-w-48 lg:min-w-40 max-sm:mx-auto;
+  }
+  .cvSectionProfExpSecondCol {
+    @apply lg:mt-6 max-sm:mb-10 sm:mt-6 sm:mb-5;
+  }
+  .cvSectionArea {
+    @apply uppercase mt-11 border-b-4 border-stone-800 font-bold text-lg;
+  }
 }
 
 body {
