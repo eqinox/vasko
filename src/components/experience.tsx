@@ -65,6 +65,7 @@ const Experience: React.FC<Props> = ({
               height={0}
               priority
               fill
+              className="object-contain object-top"
             />
           </div>
         )}

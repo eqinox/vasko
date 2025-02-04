@@ -58,6 +58,14 @@ const projects = [
       "Jest",
     ],
   },
+  {
+    title: "Fire Homes",
+    image: "/images/fire-homes.png",
+    link: "https://fire-homes-rouge.vercel.app/",
+    description:
+      "Example of an real estate website. Google authentication and email/password. Admin and user roles",
+    technologies: ["Next.js", "TypeScript", "Firebase", "ShadCN", "Zod"],
+  },
 ];
 
 const Page = () => {
@@ -106,7 +114,7 @@ const Page = () => {
             Projects
           </h2>
         </div>
-        <ul>
+        <ul className="group/list">
           {projects.map((item, index) => (
             <Experience
               type="Project"
