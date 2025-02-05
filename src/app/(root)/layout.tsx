@@ -102,7 +102,7 @@ export default function ClientLayout({
       {/* Main Wrapper */}
       <div
         ref={scrollRef}
-        className="hide-scrollbar overflow-auto lg:flex lg:justify-between lg:gap-4"
+        className="hide-scrollbar overflow-auto max-md:p-5 lg:flex lg:justify-between lg:gap-4"
       >
         <Header />
 

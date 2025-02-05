@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable}`}>
-      <body className="relative mx-auto min-h-screen max-w-screen-xl bg-slate-900 px-6 py-12 pt-0 font-sans leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 md:px-12 md:py-16 lg:py-0">
+      <body className="relative mx-auto min-h-screen max-w-screen-xl bg-slate-900 px-6 py-12 pt-0 font-sans leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 max-md:p-0 md:px-12 md:py-16 lg:py-0">
         {children}
         <h1 className="lg fixed -bottom-[5rem] -left-[2rem] -z-10 hidden select-none bg-transparent opacity-10 lg:block">
           <Image
