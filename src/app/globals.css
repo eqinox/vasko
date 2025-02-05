@@ -126,7 +126,3 @@ body::before {
   background-color: white;
   pointer-events: none;
 }
-
-.fixed-gap {
-  gap: 1rem !important;
-}

@@ -3,6 +3,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface BaseProps {
   link: string;
@@ -42,57 +43,73 @@ const Experience: React.FC<Props> = ({
   title,
   image,
 }) => {
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    const updateScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= 640); // Adjust breakpoint if needed
+    };
+
+    updateScreenSize();
+    window.addEventListener("resize", updateScreenSize);
+    return () => window.removeEventListener("resize", updateScreenSize);
+  }, []);
+
   return (
-    <>
-      <li
-        className="group relative mb-12 grid cursor-pointer gap-4 transition-all hover:!opacity-100 group-hover/list:opacity-50 sm:grid-cols-8 sm:gap-8 md:gap-4"
-        onClick={() => window.open(link, "_blank")}
-      >
-        <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50"></div>
-        {!!period && (
-          <header className="mb-2 mt-1 pb-1 text-xs font-semibold uppercase tracking-wide sm:col-span-2">
-            {period}
-          </header>
+    <li
+      className="group relative mb-12 grid cursor-pointer gap-4 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
+      onClick={isLargeScreen ? () => window.open(link, "_blank") : undefined}
+    >
+      <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50"></div>
+
+      {!!period && (
+        <header className="mb-2 mt-1 pb-1 text-xs font-semibold uppercase tracking-wide sm:col-span-2">
+          {period}
+        </header>
+      )}
+
+      <div className="z-10 sm:order-2 sm:col-span-6">
+        <h3
+          className="flex flex-row font-medium leading-snug text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300"
+          onClick={
+            !isLargeScreen ? () => window.open(link, "_blank") : undefined
+          }
+        >
+          {!!title && `${title}`}
+          {!!position && `${position}`} {!!company && ` - ${company}`}
+          <ArrowUpRight
+            className="ml-2 translate-y-1 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+            size={15}
+          />
+        </h3>
+
+        <p className="text-sm leading-normal">{description}</p>
+        {technologies.length > 0 && (
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {technologies?.map((item) => (
+              <li key={item}>
+                <Badge variant="tech">{item}</Badge>
+              </li>
+            ))}
+          </ul>
         )}
+      </div>
 
-        <div className="z-10 sm:order-2 sm:col-span-6">
-          <h3 className="flex flex-row font-medium leading-snug text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300">
-            {!!title && `${title}`}
-            {!!position && `${position}`} {!!company && ` - ${company}`}
-            <ArrowUpRight
-              className="ml-2 translate-y-1 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-              size={15}
-            />
-          </h3>
-
-          <p className="text-sm leading-normal">{description}</p>
-          {technologies.length > 0 && (
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {technologies?.map((item) => (
-                <li key={item}>
-                  <Badge variant="tech">{item}</Badge>
-                </li>
-              ))}
-            </ul>
-          )}
+      {!!image && (
+        <div className="relative max-sm:h-36 max-sm:w-44 sm:order-1 sm:col-span-2">
+          <Image
+            src={image}
+            alt="Project image"
+            sizes="100vw"
+            width={0}
+            height={0}
+            priority
+            fill
+            className="object-contain object-top"
+          />
         </div>
-
-        {!!image && (
-          <div className="relative max-sm:h-36 max-sm:w-44 sm:order-1 sm:col-span-2">
-            <Image
-              src={image}
-              alt="Project image"
-              sizes="100vw"
-              width={0}
-              height={0}
-              priority
-              fill
-              className="object-contain object-top"
-            />
-          </div>
-        )}
-      </li>
-    </>
+      )}
+    </li>
   );
 };
 

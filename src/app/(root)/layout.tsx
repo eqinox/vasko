@@ -14,20 +14,19 @@ export default function ClientLayout({
 
   const [showMouseEffect, setShowMouseEffect] = useState(true);
 
+  // ✅ Handles showing/hiding mouse effect based on screen width
   useEffect(() => {
     const handleResize = () => {
-      setShowMouseEffect(window.innerWidth >= 1024); // `lg` breakpoint in Tailwind
+      setShowMouseEffect(window.innerWidth >= 1024); // Enable effect only on large screens
     };
 
-    // Initial check
-    handleResize();
+    handleResize(); // Initial check
 
-    // Listen for resize events
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // ✅ Updates the scrollHeight state whenever the content resizes
   useEffect(() => {
     const updateScrollHeight = () => {
       if (scrollRef.current) {
@@ -35,24 +34,55 @@ export default function ClientLayout({
       }
     };
 
-    updateScrollHeight();
-    window.addEventListener("resize", updateScrollHeight);
+    updateScrollHeight(); // Initial calculation
 
+    window.addEventListener("resize", updateScrollHeight);
     return () => {
       window.removeEventListener("resize", updateScrollHeight);
     };
   }, []);
 
+  // ✅ Ensures the scroll container has the correct height
+  useEffect(() => {
+    const fixScrollHeight = () => {
+      if (!scrollRef.current) return;
+
+      const contentHeight = scrollRef.current.scrollHeight;
+      const viewportHeight = window.innerHeight;
+
+      // If the content is taller than the viewport, allow scrolling
+      if (contentHeight > viewportHeight) {
+        scrollRef.current.style.height = `${viewportHeight}px`;
+        scrollRef.current.style.overflowY = "auto"; // Enables scrolling
+      }
+    };
+
+    fixScrollHeight(); // Initial fix
+
+    window.addEventListener("resize", fixScrollHeight);
+    return () => window.removeEventListener("resize", fixScrollHeight);
+  }, []);
+
+  // ✅ Handles custom scrolling logic with the right scrollbar
   useEffect(() => {
     const handleWheelScroll = (event: WheelEvent) => {
       if (!scrollRef.current || !scrollbarRef.current) return;
 
-      // Prevent default page scroll
-      event.preventDefault();
+      event.preventDefault(); // Prevent default page scroll behavior
 
-      // Scroll content and sync with the right scrollbar
-      scrollRef.current.scrollTop += event.deltaY;
-      scrollbarRef.current.scrollTop = scrollRef.current.scrollTop;
+      const maxScrollTop =
+        scrollRef.current.scrollHeight - scrollRef.current.clientHeight;
+
+      // Prevent overscrolling
+      if (
+        (event.deltaY > 0 && scrollRef.current.scrollTop >= maxScrollTop) ||
+        (event.deltaY < 0 && scrollRef.current.scrollTop <= 0)
+      ) {
+        return;
+      }
+
+      scrollRef.current.scrollTop += event.deltaY; // Scroll content
+      scrollbarRef.current.scrollTop = scrollRef.current.scrollTop; // Sync scrollbar position
     };
 
     const syncScrollFromScrollbar = () => {
@@ -61,10 +91,8 @@ export default function ClientLayout({
       }
     };
 
-    // Listen for scrolling events
     window.addEventListener("wheel", handleWheelScroll, { passive: false });
 
-    // Sync when dragging the right scrollbar
     if (scrollbarRef.current) {
       scrollbarRef.current.addEventListener("scroll", syncScrollFromScrollbar);
     }
@@ -80,6 +108,7 @@ export default function ClientLayout({
     };
   }, []);
 
+  // ✅ Tracks the user's mouse movement for the radial gradient effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -89,13 +118,37 @@ export default function ClientLayout({
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  // ✅ Ensures that the content fills the full viewport on mobile screens
+  useEffect(() => {
+    const adjustHeight = () => {
+      if (!scrollRef.current) return;
+
+      const contentHeight = scrollRef.current.scrollHeight;
+      const viewportHeight = window.innerHeight;
+
+      // If content is shorter than the viewport, ensure it takes full height
+      if (contentHeight < viewportHeight) {
+        scrollRef.current.style.minHeight = `${viewportHeight}px`;
+      }
+    };
+
+    adjustHeight(); // Initial adjustment
+
+    window.addEventListener("resize", adjustHeight);
+    return () => window.removeEventListener("resize", adjustHeight);
+  }, []);
+
   return (
     <>
       {/* Radial Mouse Effect */}
       <div
         className="pointer-events-none fixed inset-0 z-30 transition-all duration-300"
         style={{
-          background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`,
+          background: `${
+            showMouseEffect
+              ? `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
+              : ""
+          } `,
         }}
       />
 
@@ -103,6 +156,9 @@ export default function ClientLayout({
       <div
         ref={scrollRef}
         className="hide-scrollbar overflow-auto max-md:p-5 lg:flex lg:justify-between lg:gap-4"
+        style={{
+          overscrollBehavior: "contain", // Prevents scrolling past the content
+        }}
       >
         <Header />
 
