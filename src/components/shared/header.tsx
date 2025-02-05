@@ -12,7 +12,7 @@ const Header = () => {
           Web Developer
         </h2>
         <p className="mt-4 max-w-xs leading-normal">
-          I design and code beautifully things for tbe web, and I love what I
+          I design and code beautifully things for the web, and I love what I
           do.
         </p>
         <Nav />
