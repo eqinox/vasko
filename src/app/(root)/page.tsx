@@ -58,12 +58,20 @@ const projects = [
       "Jest",
     ],
   },
+  // {
+  //   title: "Fire Homes",
+  //   image: "/images/fire-homes.png",
+  //   link: "https://fire-homes-rouge.vercel.app/",
+  //   description:
+  //     "Example of an real estate website. Google authentication and email/password. Admin and user roles",
+  //   technologies: ["Next.js", "TypeScript", "Firebase", "ShadCN", "Zod"],
+  // },
   {
-    title: "Fire Homes",
-    image: "/images/fire-homes.png",
-    link: "https://fire-homes-rouge.vercel.app/",
+    title: "Sweet Surprises",
+    image: "/images/sweet-surprises.png",
+    link: "https://www.sweetsurprises.bg/",
     description:
-      "Example of an real estate website. Google authentication and email/password. Admin and user roles",
+      "Website for studio where you can make account and reservation",
     technologies: ["Next.js", "TypeScript", "Firebase", "ShadCN", "Zod"],
   },
 ];
