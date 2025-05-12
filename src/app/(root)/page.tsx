@@ -74,6 +74,13 @@ const projects = [
       "Website for studio where you can make account and reservation",
     technologies: ["Next.js", "TypeScript", "Firebase", "ShadCN", "Zod"],
   },
+  {
+    title: "Мебели Николов",
+    image: "/images/mebeli-nikolov.png",
+    link: "https://mebeli-nikolov.com",
+    description: "Website for furnitures",
+    technologies: ["Next.js", "TypeScript"],
+  },
 ];
 
 const Page = () => {
