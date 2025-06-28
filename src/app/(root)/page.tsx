@@ -3,6 +3,7 @@ import Experience from "@/components/experience";
 
 const experience = [
   {
+    id: 1,
     period: "2022 — 2024",
     position: "Frontend Developer",
     company: "Arte Soft",
@@ -12,6 +13,7 @@ website for Sofia University St. Kliment Ohridski`,
     technologies: ["JavaScript", "React"],
   },
   {
+    id: 2,
     period: "2018 — 2021",
     position: "Data Processing Technology team",
     company: "Internet Securities",
@@ -23,6 +25,7 @@ for other teams`,
     technologies: ["Python", "Perl", "Selenium", "Web Scraping", "React"],
   },
   {
+    id: 3,
     period: "2017 — 2018",
     position: "FullStack Developer",
     company: "Metareading",
@@ -31,6 +34,7 @@ for other teams`,
     technologies: ["Saleforce", "Express", "Angular", "Node.js"],
   },
   {
+    id: 4,
     period: "Apr — Oct 2015",
     position: "Trainee",
     company: "Indeavr",
@@ -42,6 +46,7 @@ for other teams`,
 
 const projects = [
   {
+    id: 5,
     title: "Ecommerce Shopping Platform",
     image: "/images/prostore.png",
     link: "https://ecommerce-shopping-platform.vercel.app/",
@@ -67,6 +72,7 @@ const projects = [
   //   technologies: ["Next.js", "TypeScript", "Firebase", "ShadCN", "Zod"],
   // },
   {
+    id: 6,
     title: "Sweet Surprises",
     image: "/images/sweet-surprises.png",
     link: "https://www.sweetsurprises.bg/",
@@ -75,6 +81,7 @@ const projects = [
     technologies: ["Next.js", "TypeScript", "Firebase", "ShadCN", "Zod"],
   },
   {
+    id: 7,
     title: "Мебели Николов",
     image: "/images/mebeli-nikolov.png",
     link: "https://mebeli-nikolov.com",
@@ -110,6 +117,7 @@ const Page = () => {
         <ol className="group/list">
           {experience.map((item, index) => (
             <Experience
+              id={item.id}
               company={item.company}
               description={item.description}
               link={item.link}
@@ -133,6 +141,7 @@ const Page = () => {
           {projects.map((item, index) => (
             <Experience
               type="Project"
+              id={item.id}
               description={item.description}
               image={item.image}
               link={item.link}

@@ -3,9 +3,13 @@
 import { ArrowUpRight } from "lucide-react";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
+import gsap from "gsap";
 import { useEffect, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface BaseProps {
+  id: number;
   link: string;
   description: string;
   technologies: string[];
@@ -34,6 +38,7 @@ type ExperienceProps = {
 type Props = ProjectProps | ExperienceProps;
 
 const Experience: React.FC<Props> = ({
+  id,
   period,
   position,
   company,
@@ -55,6 +60,39 @@ const Experience: React.FC<Props> = ({
     return () => window.removeEventListener("resize", updateScreenSize);
   }, []);
 
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    
+    // Find the actual scroll container
+    const scrollContainer = document.querySelector('.hide-scrollbar');
+    
+    gsap.to(`.right-content${id}`, {
+      x: 0,
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: `.right-content${id}`,
+        start: 'top 90%',
+        scroller: scrollContainer,
+        toggleActions: 'restart none none reverse'
+      }
+    })
+
+    gsap.to(`.left-content${id}`, {
+      x: 0,
+      opacity: 1,
+      delay: 0.3,
+      duration: 1,
+      scrollTrigger: {
+        trigger: `.left-content${id}`,
+        start: 'top 90%',
+        scroller: scrollContainer,
+        toggleActions: 'restart none none reverse'
+      }
+    })
+
+  }, {})
+
   return (
     <li
       className="group relative mb-12 grid cursor-pointer gap-4 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50"
@@ -62,13 +100,14 @@ const Experience: React.FC<Props> = ({
     >
       <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50"></div>
 
+
       {!!period && (
-        <header className="mb-2 mt-1 pb-1 text-xs font-semibold uppercase tracking-wide sm:col-span-2">
+        <header className={`mb-2 mt-1 pb-1 text-xs font-semibold uppercase tracking-wide sm:col-span-2 left-content${id} -translate-x-[392px] opacity-0`}>
           {period}
         </header>
       )}
 
-      <div className="z-10 sm:order-2 sm:col-span-6">
+      <div className={`z-10 sm:order-2 sm:col-span-6 right-content${id} -translate-x-[392px] opacity-0`}>
         <h3
           className="flex flex-row font-medium leading-snug text-slate-200 group-hover:text-teal-300 group-focus-visible:text-teal-300"
           onClick={
@@ -96,7 +135,7 @@ const Experience: React.FC<Props> = ({
       </div>
 
       {!!image && (
-        <div className="relative max-sm:h-36 max-sm:w-44 sm:order-1 sm:col-span-2">
+        <div className={`relative max-sm:h-36 max-sm:w-44 sm:order-1 sm:col-span-2 left-content${id} -translate-x-[392px] opacity-0`}>
           <Image
             src={image}
             alt="Project image"
