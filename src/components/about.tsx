@@ -1,7 +1,7 @@
 const About = () => {
   return (
     <>
-      Hi there, my name is Vasil Nikolov, a Web Developer based in Sofia
+      Hi there, my name is Vasil Nikolov, a Software Engineer based in Sofia
       Bulgaria.
       <br />
       <br />
