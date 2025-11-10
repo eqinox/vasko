@@ -13,7 +13,7 @@ const Socials = () => {
         className="hover:text-slate-200"
         cursor="pointer"
         onClick={() =>
-          window.open("https://www.linkedin.com/in/vasil-nikolov-bb8696a6/")
+          window.open("https://www.linkedin.com/in/vasil-nikolov93/")
         }
       />
     </ul>
